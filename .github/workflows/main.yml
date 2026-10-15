@@ -17,9 +17,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Download Spigot API
+      run: |
+        curl -o spigot-api.jar https://hub.spigotmc.org/nexus/content/repositories/snapshots/org/spigotmc/spigot-api/1.20-R0.1-SNAPSHOT/spigot-api-1.20-R0.1-20230614.221629-31.jar
+
     - name: Compile Java & Create JAR
       run: |
-        javac *.java
+        javac -cp spigot-api.jar AntiCrashPro.java
         jar cvfe best-anti-crash.jar AntiCrashPro *.class
 
     - name: Upload JAR Artifact
